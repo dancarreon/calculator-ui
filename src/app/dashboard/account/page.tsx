@@ -12,7 +12,7 @@ import {type User} from "@/types/user";
 
 export const metadata = { title: `Account | ${config.site.name}` } satisfies Metadata;
 
-export default async function Page(): Promise<> {
+export default async function Page(): Promise<any> {
 
   const userInfo: User = await getUserInfo();
 

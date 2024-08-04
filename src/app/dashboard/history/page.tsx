@@ -16,7 +16,7 @@ export interface UserRecord {
   date: Date;
 }
 
-export default async function Page(): Promise<> {
+export default async function Page(): Promise<any> {
 
   let userRecords: UserRecord[];
   const history = await getHistory() as string;

@@ -19,7 +19,7 @@ import {
   getUserBalance
 } from "@/server/actions/actions";
 
-export default function Page(): Promise<> {
+export default function Page(): Promise<any> {
 
   const [additionResult, setAdditionResult] =  useState('');
   const [subtractionResult, setSubtractionResult] =  useState('');
