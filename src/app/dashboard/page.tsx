@@ -38,7 +38,7 @@ export default function Page(): Promise<any> {
   const [randomStringResult, setRandomStringResult] =  useState('');
   const [userBalance, setUserBalance] = useState('');
   const [totalRequests, setTotalRequests] = useState(0);
-  const [userHistory, setUserHistory] = useState();
+  const [userHistory, setUserHistory] = useState<UserRecord[] | null>();
 
   const additionAction = async (formData: FormData) => {
     const result = await doAddition(formData) as string;
