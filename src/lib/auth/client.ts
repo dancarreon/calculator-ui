@@ -1,7 +1,7 @@
 'use client';
 
-import type { User } from '@/types/user';
 import {getUserInfo, login} from "@/server/actions/actions";
+import {User} from "@/types/user";
 
 function generateToken(): string {
   const arr = new Uint8Array(12);

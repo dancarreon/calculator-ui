@@ -15,7 +15,6 @@ import TableRow from '@mui/material/TableRow';
 import {ArrowRight as ArrowRightIcon} from '@phosphor-icons/react/dist/ssr/ArrowRight';
 import dayjs from 'dayjs';
 import {paths} from "@/paths";
-import {Is} from "@sinclair/typebox/value/is";
 
 const statusMap = {
   400: { label: 'Unauthorized', color: 'warning' },

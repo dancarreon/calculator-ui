@@ -19,8 +19,6 @@ import {
   getUserBalance
 } from "@/server/actions/actions";
 import {type UserRecord} from "@/app/dashboard/history/page";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
 
 interface DivisionResponse {
   message: string;
@@ -32,12 +30,12 @@ interface RandomString {
 
 export default function Page(): ReactElement {
 
-  const [additionResult, setAdditionResult] =  useState('');
-  const [subtractionResult, setSubtractionResult] =  useState('');
-  const [multiplicationResult, setMultiplicationResult] =  useState('');
-  const [divisionResult, setDivisionResult] =  useState('');
-  const [sqrtResult, setSqrtResult] =  useState('');
-  const [randomStringResult, setRandomStringResult] =  useState('');
+  const [additionResult, setAdditionResult] = useState('');
+  const [subtractionResult, setSubtractionResult] = useState('');
+  const [multiplicationResult, setMultiplicationResult] = useState('');
+  const [divisionResult, setDivisionResult] = useState('');
+  const [sqrtResult, setSqrtResult] = useState('');
+  const [randomStringResult, setRandomStringResult] = useState('');
   const [userBalance, setUserBalance] = useState('');
   const [totalRequests, setTotalRequests] = useState(0);
   const [userHistory, setUserHistory] = useState<UserRecord[]>();
@@ -108,7 +106,9 @@ export default function Page(): ReactElement {
   })
 
   useEffect(() => {
-    retrieveUserHistory();
+    retrieveUserHistory().catch((err: unknown) => {
+      console.log(err);
+    });
   }, [])
 
   return (
@@ -122,51 +122,89 @@ export default function Page(): ReactElement {
       <Grid lg={7} xs={12}>
         <form action={additionAction}>
           <OutlinedInput name='a' sx={{marginRight: '10px', width: '100px'}} onKeyDown={onlyNumbers}/>
-          <Button type="button" variant="contained" disabled sx={{backgroundColor: '#677 !important', color: 'white !important', fontSize: '23px', verticalAlign: 'bottom'}}> + </Button>
+          <Button type="button" variant="contained" disabled sx={{
+            backgroundColor: '#677 !important',
+            color: 'white !important',
+            fontSize: '23px',
+            verticalAlign: 'bottom'
+          }}> + </Button>
           <OutlinedInput name='b' sx={{marginLeft: '10px', width: '100px'}} onKeyDown={onlyNumbers}/>
-          <Button type="submit" variant="contained" sx={{marginLeft: '10px', fontSize: '23px', verticalAlign: 'bottom'}}> = </Button>
+          <Button type="submit" variant="contained"
+                  sx={{marginLeft: '10px', fontSize: '23px', verticalAlign: 'bottom'}}> = </Button>
           <OutlinedInput sx={{marginLeft: '10px', width: '30%'}} disabled value={additionResult}/>
         </form>
       </Grid>
       <Grid lg={7} xs={12}>
         <form action={subtractionAction}>
           <OutlinedInput name='a' sx={{marginRight: '10px', width: '100px'}} onKeyDown={onlyNumbers}/>
-          <Button type="button" variant="contained" disabled sx={{backgroundColor: '#677 !important', color: 'white !important', fontSize: '23px', verticalAlign: 'bottom'}}> - </Button>
+          <Button type="button" variant="contained" disabled sx={{
+            backgroundColor: '#677 !important',
+            color: 'white !important',
+            fontSize: '23px',
+            verticalAlign: 'bottom'
+          }}> - </Button>
           <OutlinedInput name='b' sx={{marginLeft: '10px', width: '100px'}} onKeyDown={onlyNumbers}/>
-          <Button type="submit" variant="contained" sx={{marginLeft: '10px', fontSize: '23px', verticalAlign: 'bottom'}}> = </Button>
+          <Button type="submit" variant="contained"
+                  sx={{marginLeft: '10px', fontSize: '23px', verticalAlign: 'bottom'}}> = </Button>
           <OutlinedInput sx={{marginLeft: '10px', width: '30%'}} disabled value={subtractionResult}/>
         </form>
       </Grid>
       <Grid lg={7} xs={12}>
         <form action={multiplicationAction}>
           <OutlinedInput name='a' sx={{marginRight: '10px', width: '100px'}} onKeyDown={onlyNumbers}/>
-          <Button type="button" variant="contained" disabled sx={{backgroundColor: '#677 !important', color: 'white !important', fontSize: '23px', verticalAlign: 'bottom'}}> * </Button>
+          <Button type="button" variant="contained" disabled sx={{
+            backgroundColor: '#677 !important',
+            color: 'white !important',
+            fontSize: '23px',
+            verticalAlign: 'bottom'
+          }}> * </Button>
           <OutlinedInput name='b' sx={{marginLeft: '10px', width: '100px'}} onKeyDown={onlyNumbers}/>
-          <Button type="submit" variant="contained" sx={{marginLeft: '10px', fontSize: '23px', verticalAlign: 'bottom'}}> = </Button>
+          <Button type="submit" variant="contained"
+                  sx={{marginLeft: '10px', fontSize: '23px', verticalAlign: 'bottom'}}> = </Button>
           <OutlinedInput sx={{marginLeft: '10px', width: '30%'}} disabled value={multiplicationResult}/>
         </form>
       </Grid>
       <Grid lg={7} xs={12}>
         <form action={divisionAction}>
           <OutlinedInput name='a' sx={{marginRight: '10px', width: '100px'}} onKeyDown={onlyNumbers}/>
-          <Button type="button" variant="contained" disabled sx={{backgroundColor: '#677 !important', color: 'white !important', fontSize: '23px', verticalAlign: 'bottom'}}> / </Button>
+          <Button type="button" variant="contained" disabled sx={{
+            backgroundColor: '#677 !important',
+            color: 'white !important',
+            fontSize: '23px',
+            verticalAlign: 'bottom'
+          }}> / </Button>
           <OutlinedInput name='b' sx={{marginLeft: '10px', width: '100px'}} onKeyDown={onlyNumbers}/>
-          <Button type="submit" variant="contained" sx={{marginLeft: '10px', fontSize: '23px', verticalAlign: 'bottom'}}> = </Button>
+          <Button type="submit" variant="contained"
+                  sx={{marginLeft: '10px', fontSize: '23px', verticalAlign: 'bottom'}}> = </Button>
           <OutlinedInput sx={{marginLeft: '10px', width: '30%'}} disabled value={divisionResult}/>
         </form>
       </Grid>
       <Grid lg={7} xs={12}>
         <form action={sqrtAction}>
-          <Button type="button" variant="contained" disabled sx={{backgroundColor: '#677 !important', color: 'white !important', fontSize: '23px', verticalAlign: 'bottom', marginLeft: '110px'}}> &#8730; </Button>
+          <Button type="button" variant="contained" disabled sx={{
+            backgroundColor: '#677 !important',
+            color: 'white !important',
+            fontSize: '23px',
+            verticalAlign: 'bottom',
+            marginLeft: '110px'
+          }}> &#8730; </Button>
           <OutlinedInput name='a' sx={{marginLeft: '10px', width: '100px'}} onKeyDown={onlyNumbers}/>
-          <Button type="submit" variant="contained" sx={{marginLeft: '10px', fontSize: '23px', verticalAlign: 'bottom'}}> = </Button>
+          <Button type="submit" variant="contained"
+                  sx={{marginLeft: '10px', fontSize: '23px', verticalAlign: 'bottom'}}> = </Button>
           <OutlinedInput sx={{marginLeft: '10px', width: '30%'}} disabled value={sqrtResult}/>
         </form>
       </Grid>
       <Grid lg={7} xs={12}>
         <form action={randomStringAction}>
-          <Button type="button" variant="contained" disabled sx={{backgroundColor: '#677 !important', color: 'white !important', fontSize: '19.1px', verticalAlign: 'bottom', marginLeft: '110px'}}> Random String </Button>
-          <Button type="submit" variant="contained" sx={{marginLeft: '10px', fontSize: '23px', verticalAlign: 'bottom'}}> = </Button>
+          <Button type="button" variant="contained" disabled sx={{
+            backgroundColor: '#677 !important',
+            color: 'white !important',
+            fontSize: '19.1px',
+            verticalAlign: 'bottom',
+            marginLeft: '110px'
+          }}> Random String </Button>
+          <Button type="submit" variant="contained"
+                  sx={{marginLeft: '10px', fontSize: '23px', verticalAlign: 'bottom'}}> = </Button>
           <OutlinedInput sx={{marginLeft: '10px', width: '30%'}} disabled value={randomStringResult}/>
         </form>
       </Grid>
