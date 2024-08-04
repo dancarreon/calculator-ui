@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react';
-import {useEffect, useState} from 'react';
+import {ReactElement, useEffect, useState} from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 import {Budget} from '@/components/dashboard/overview/budget';
 import {LatestOrders} from '@/components/dashboard/overview/latest-orders';
@@ -28,7 +28,7 @@ interface RandomString {
   message: string;
 }
 
-export default function Page(): Promise<any> {
+export default function Page(): ReactElement {
 
   const [additionResult, setAdditionResult] =  useState('');
   const [subtractionResult, setSubtractionResult] =  useState('');
