@@ -24,6 +24,10 @@ interface DivisionResponse {
   message: string;
 }
 
+interface RandomString {
+  message: string;
+}
+
 export default function Page(): Promise<any> {
 
   const [additionResult, setAdditionResult] =  useState('');
@@ -52,7 +56,8 @@ export default function Page(): Promise<any> {
   }
 
   const divisionAction = async (formData: FormData) => {
-    const result: DivisionResponse = await doDivision(formData) as object;
+    const result: DivisionResponse = await doDivision(formData) as DivisionResponse;
+    console.log(result);
     setDivisionResult(result.message);
   }
 
@@ -62,7 +67,7 @@ export default function Page(): Promise<any> {
   }
 
   const randomStringAction = async () => {
-    const result = await doRandomString() as string;
+    const result: RandomString = await doRandomString() as RandomString;
     setRandomStringResult(result?.message);
   }
 
