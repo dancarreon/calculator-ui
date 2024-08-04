@@ -54,7 +54,7 @@ export default function NextAppDirEmotionCacheProvider(props: NextAppDirEmotionC
     let styles = '';
     let dataEmotionAttribute = registry.cache.key;
 
-    const globals: { name: string; style: string | TrustedHTML }[] = [];
+    const globals: { name: string; style: string | undefined }[] = [];
 
     inserted.forEach(({ name, isGlobal }) => {
       const style = registry.cache.inserted[name];
