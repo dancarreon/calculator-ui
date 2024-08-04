@@ -77,14 +77,14 @@ export default function Page(): Promise<any> {
   }
 
   const retrieveTotalRequests = async () => {
-    const history: UserRecord[] = await getHistory() as object;
+    const history = await getHistory() as UserRecord[];
     if (history) {
       setTotalRequests(history.length);
     }
   }
 
   const retrieveUserHistory = async () => {
-    const history: UserRecord[] = await getHistory() as object;
+    const history = await getHistory() as UserRecord[];
     if (history) {
       setUserHistory(history.slice(0, 2));
     }
