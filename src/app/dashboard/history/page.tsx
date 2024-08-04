@@ -18,7 +18,7 @@ export interface UserRecord {
 
 export default async function Page(): Promise<any> {
 
-  const history: UserRecord[] = await getHistory() as object;
+  const history = await getHistory() as object;
 
   const page = 0;
   const rowsPerPage = 5;
