@@ -18,19 +18,7 @@ export interface UserRecord {
 
 export default async function Page(): Promise<any> {
 
-  let userRecords: UserRecord[];
   const history: UserRecord[] = await getHistory() as object;
-
-  if (history) {
-    userRecords = history?.map((record: UserRecord) => {
-      return {
-        amount: String(record?.amount),
-        userBalance: String(record?.userBalance),
-        operationResponse: String(record?.operationResponse),
-        date: String(record?.date),
-      };
-    })
-  }
 
   const page = 0;
   const rowsPerPage = 5;
@@ -43,9 +31,9 @@ export default async function Page(): Promise<any> {
         </Stack>
       </Stack>
       <HistoryTable
-        count={userRecords ? userRecords.length : null}
+        count={history ? history.length : null}
         page={page}
-        rows={userRecords}
+        rows={history}
         rowsPerPage={rowsPerPage}
       />
     </Stack>
