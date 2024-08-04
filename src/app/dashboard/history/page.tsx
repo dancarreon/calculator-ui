@@ -19,9 +19,9 @@ export interface UserRecord {
 export default async function Page(): Promise<any> {
 
   let userRecords: UserRecord[];
-  const history = await getHistory() as string;
+  const history = await getHistory() as object;
 
-  if (history) {
+  if (history && Object.prototype.hasOwnProperty.call(history, '_embedded')) {
     userRecords = history?._embedded?.records?.map((record: UserRecord) => {
       return {
         amount: String(record?.amount),
