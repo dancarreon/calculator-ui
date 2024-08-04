@@ -19,7 +19,7 @@ import {
   getUserBalance
 } from "@/server/actions/actions";
 
-export default function Page(): React.JSX.Element {
+export default function Page(): Promise<> {
 
   const [additionResult, setAdditionResult] =  useState('');
   const [subtractionResult, setSubtractionResult] =  useState('');

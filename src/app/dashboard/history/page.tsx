@@ -16,7 +16,7 @@ export interface UserRecord {
   date: Date;
 }
 
-export default async function Page(): React.JSX.Element {
+export default async function Page(): Promise<> {
 
   let userRecords: UserRecord[];
   const history = await getHistory() as string;
