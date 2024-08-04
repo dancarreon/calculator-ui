@@ -9,10 +9,16 @@ import {getHistory} from "@/server/actions/actions";
 
 export const metadata = {title: `History | ${config.site.name}`} satisfies Metadata;
 
+const statusMap = {
+  400: { label: 'Unauthorized', color: 'warning' },
+  200: { label: 'Success', color: 'success' },
+  500: { label: 'Error', color: 'error' },
+} as const;
+
 export interface UserRecord {
   amount: number;
   userBalance: number;
-  operationResponse: number;
+  operationResponse: keyof typeof statusMap;
   date: Date;
   avatar: string;
 }
