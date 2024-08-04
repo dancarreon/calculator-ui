@@ -31,7 +31,7 @@ export default async function Page(): Promise<any> {
         </Stack>
       </Stack>
       <HistoryTable
-        count={history ? history.length : null}
+        count={history ? history.length : 0}
         page={page}
         rows={history}
         rowsPerPage={rowsPerPage}
