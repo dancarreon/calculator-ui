@@ -1,4 +1,4 @@
-const { resolve } = require('node:path');
+const {resolve} = require('node:path');
 
 const project = resolve(__dirname, 'tsconfig.json');
 
@@ -22,6 +22,10 @@ module.exports = {
     },
   },
   rules: {
+    'no-console': [
+      'warn',
+      {'allow': ['clear', 'info', 'error', 'dir', 'trace', 'log']}
+    ],
     '@typescript-eslint/no-unused-vars': [
       'error',
       {

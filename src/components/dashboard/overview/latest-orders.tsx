@@ -14,11 +14,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { ArrowRight as ArrowRightIcon } from '@phosphor-icons/react/dist/ssr/ArrowRight';
 import dayjs from 'dayjs';
+import {paths} from "@/paths";
 
 const statusMap = {
-  pending: { label: 'Pending', color: 'warning' },
-  delivered: { label: 'Delivered', color: 'success' },
-  refunded: { label: 'Refunded', color: 'error' },
+  400: { label: 'Unauthorized', color: 'warning' },
+  200: { label: 'Success', color: 'success' },
+  500: { label: 'Error', color: 'error' },
 } as const;
 
 export interface Order {
@@ -29,41 +30,47 @@ export interface Order {
   createdAt: Date;
 }
 
+export interface UserRecord {
+  amount: number;
+  userBalance: number;
+  operationResponse: number;
+  date: Date;
+}
+
 export interface LatestOrdersProps {
-  orders?: Order[];
+  orders?: UserRecord[];
   sx?: SxProps;
 }
 
 export function LatestOrders({ orders = [], sx }: LatestOrdersProps): React.JSX.Element {
   return (
     <Card sx={sx}>
-      <CardHeader title="Latest orders" />
+      <CardHeader title="Latest Requests" />
       <Divider />
       <Box sx={{ overflowX: 'auto' }}>
         <Table sx={{ minWidth: 800 }}>
           <TableHead>
             <TableRow>
-              <TableCell>Order</TableCell>
-              <TableCell>Customer</TableCell>
+              <TableCell>Cost</TableCell>
+              <TableCell>Balance</TableCell>
               <TableCell sortDirection="desc">Date</TableCell>
               <TableCell>Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {orders.map((order) => {
-              const { label, color } = statusMap[order.status] ?? { label: 'Unknown', color: 'default' };
-
+            {orders?.length > 0 ? orders.map((order, index) => {
+              const { label, color } = statusMap[order.operationResponse] ?? { label: 'Unknown', color: 'default' };
               return (
-                <TableRow hover key={order.id}>
-                  <TableCell>{order.id}</TableCell>
-                  <TableCell>{order.customer.name}</TableCell>
-                  <TableCell>{dayjs(order.createdAt).format('MMM D, YYYY')}</TableCell>
+                <TableRow hover key={index}>
+                  <TableCell>{order.amount}</TableCell>
+                  <TableCell>{order.userBalance}</TableCell>
+                  <TableCell>{dayjs(order.date).format('MMM D, YYYY')}</TableCell>
                   <TableCell>
                     <Chip color={color} label={label} size="small" />
                   </TableCell>
                 </TableRow>
               );
-            })}
+            }) : null}
           </TableBody>
         </Table>
       </Box>
@@ -74,6 +81,7 @@ export function LatestOrders({ orders = [], sx }: LatestOrdersProps): React.JSX.
           endIcon={<ArrowRightIcon fontSize="var(--icon-fontSize-md)" />}
           size="small"
           variant="text"
+          href={paths.dashboard.history}
         >
           View all
         </Button>
