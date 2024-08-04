@@ -1,6 +1,7 @@
 'use client';
 
 import {getUserInfo, login} from "@/server/actions/actions";
+import {User} from "@/types/user";
 
 function generateToken(): string {
   const arr = new Uint8Array(12);
@@ -68,7 +69,7 @@ class AuthClient {
       return {data: null};
     }
 
-    return { data: await getUserInfo() };
+    return { data: await getUserInfo() as User };
   }
 
   async signOut(): Promise<{ error?: string }> {
