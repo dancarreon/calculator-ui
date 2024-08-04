@@ -2,10 +2,12 @@
 
 import {cookies} from "next/headers";
 
+const baseUrl: string = process.env.BACK_END_URL as string;
+
 export const login = async (email: string, password: string) => {
   try {
 
-    const loginResponse = await fetch('http://localhost:8080/v1/login', {
+    const loginResponse = await fetch(`${baseUrl}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -46,7 +48,7 @@ export const login = async (email: string, password: string) => {
 
 export const logout = async () => {
 
-  const logoutResponse = await fetch('http://localhost:8080/v1/logout', {
+  const logoutResponse = await fetch(`${baseUrl}/logout`, {
     method: 'POST',
     cache: "no-cache",
     headers: {
@@ -71,7 +73,7 @@ export const getUserInfo = async () => {
 
   if (cookie) {
     try {
-      const userInfo = await fetch('http://localhost:8080/v1/user/me', {
+      const userInfo = await fetch(`${baseUrl}/user/me`, {
         method: 'GET',
         cache: "no-store",
         headers: {
@@ -100,7 +102,7 @@ export const getUserBalance = async () => {
 
   if (cookie) {
     try {
-      const userBalance = await fetch('http://localhost:8080/v1/user/balance', {
+      const userBalance = await fetch(`${baseUrl}/user/balance`, {
         method: 'GET',
         cache: "no-store",
         headers: {
@@ -129,7 +131,7 @@ export const getHistory = async () => {
 
   if (cookie) {
     try {
-      const userHistory = await fetch('http://localhost:8080/v1/users/records', {
+      const userHistory = await fetch( `${baseUrl}/user/records`, {
         method: 'GET',
         cache: "no-cache",
         headers: {
@@ -159,7 +161,7 @@ export async function doAddition (formData: FormData) {
     try {
       const a = formData?.get('a') as string;
       const b = formData?.get('b') as string;
-      const additionResponse = await fetch(`http://localhost:8080/v1/calculator/addition?a=${a}&b=${b}`, {
+      const additionResponse = await fetch(`${baseUrl}/calculator/addition?a=${a}&b=${b}`, {
         method: 'GET',
         cache: "no-cache",
         headers: {
@@ -189,7 +191,7 @@ export async function doSubtraction (formData: FormData) {
     try {
       const a = formData?.get('a') as string;
       const b = formData?.get('b') as string;
-      const subtractionResponse = await fetch(`http://localhost:8080/v1/calculator/subtraction?a=${a}&b=${b}`, {
+      const subtractionResponse = await fetch(`${baseUrl}/calculator/subtraction?a=${a}&b=${b}`, {
         method: 'GET',
         cache: "no-cache",
         headers: {
@@ -219,7 +221,7 @@ export async function doMultiplication(formData: FormData) {
     try {
       const a = formData?.get('a') as string;
       const b = formData?.get('b') as string;
-      const multiplicationResponse = await fetch(`http://localhost:8080/v1/calculator/multiplication?a=${a}&b=${b}`, {
+      const multiplicationResponse = await fetch(`${baseUrl}/calculator/multiplication?a=${a}&b=${b}`, {
         method: 'GET',
         cache: "no-cache",
         headers: {
@@ -249,7 +251,7 @@ export async function doDivision(formData: FormData) {
     try {
       const a = formData?.get('a') as string;
       const b = formData?.get('b') as string;
-      const divisionResponse = await fetch(`http://localhost:8080/v1/calculator/division?a=${a}&b=${b}`, {
+      const divisionResponse = await fetch(`${baseUrl}/calculator/division?a=${a}&b=${b}`, {
         method: 'GET',
         cache: "no-cache",
         headers: {
@@ -279,7 +281,7 @@ export async function doSquareRoot(formData: FormData) {
     try {
       const a = formData?.get('a') as string;
       const b = formData?.get('b') as string;
-      const squareRootResponse = await fetch(`http://localhost:8080/v1/calculator/square-root?a=${a}&b=${b}`, {
+      const squareRootResponse = await fetch(`${baseUrl}/calculator/square-root?a=${a}&b=${b}`, {
         method: 'GET',
         cache: "no-cache",
         headers: {
@@ -307,7 +309,7 @@ export async function doRandomString() {
 
   if (cookie) {
     try {
-      const randomStringResponse = await fetch(`http://localhost:8080/v1/calculator/random-string`, {
+      const randomStringResponse = await fetch(`${baseUrl}/calculator/random-string`, {
         method: 'GET',
         cache: "no-cache",
         headers: {

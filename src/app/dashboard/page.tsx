@@ -28,7 +28,7 @@ export default function Page(): React.JSX.Element {
   const [sqrtResult, setSqrtResult] =  useState('');
   const [randomStringResult, setRandomStringResult] =  useState('');
   const [userBalance, setUserBalance] = useState('');
-  const [totalRequests, setTotalRequests] = useState('');
+  const [totalRequests, setTotalRequests] = useState(0);
   const [userHistory, setUserHistory] = useState();
 
   const additionAction = async (formData: FormData) => {
@@ -67,16 +67,16 @@ export default function Page(): React.JSX.Element {
   }
 
   const retrieveTotalRequests = async () => {
-    const history = await getHistory() as string;
-    setTotalRequests(history._embedded.records.length);
+    const history = await getHistory() as object;
+    if (history && Object.prototype.hasOwnProperty.call(history, '_embedded')) {
+      setTotalRequests(history?._embedded?.records.length);
+    }
   }
 
   const retrieveUserHistory = async () => {
-    const history = await getHistory() as string;
-    if (history._embedded.records !== null && history._embedded.records.length >= 2) {
-      setUserHistory(history._embedded.records.slice(0, 2));
-    } else {
-      setUserHistory({});
+    const history = await getHistory() as object;
+    if (history && Object.prototype.hasOwnProperty.call(history, '_embedded')) {
+      setUserHistory(history?._embedded.records.slice(0, 2));
     }
   }
 

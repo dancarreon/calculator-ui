@@ -43,7 +43,7 @@ export default async function Page(): React.JSX.Element {
         </Stack>
       </Stack>
       <HistoryTable
-        count={userRecords.length}
+        count={userRecords ? userRecords.length : null}
         page={page}
         rows={userRecords}
         rowsPerPage={rowsPerPage}
