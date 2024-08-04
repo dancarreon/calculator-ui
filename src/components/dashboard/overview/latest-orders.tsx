@@ -6,15 +6,16 @@ import CardActions from '@mui/material/CardActions';
 import CardHeader from '@mui/material/CardHeader';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
-import type { SxProps } from '@mui/material/styles';
+import type {SxProps} from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { ArrowRight as ArrowRightIcon } from '@phosphor-icons/react/dist/ssr/ArrowRight';
+import {ArrowRight as ArrowRightIcon} from '@phosphor-icons/react/dist/ssr/ArrowRight';
 import dayjs from 'dayjs';
 import {paths} from "@/paths";
+import {Is} from "@sinclair/typebox/value/is";
 
 const statusMap = {
   400: { label: 'Unauthorized', color: 'warning' },
@@ -33,7 +34,7 @@ export interface Order {
 export interface UserRecord {
   amount: number;
   userBalance: number;
-  operationResponse: number;
+  operationResponse: keyof typeof statusMap;
   date: Date;
 }
 
