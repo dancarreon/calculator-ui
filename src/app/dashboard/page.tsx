@@ -48,7 +48,7 @@ export default function Page(): Promise<any> {
   }
 
   const divisionAction = async (formData: FormData) => {
-    const result = await doDivision(formData) as string;
+    const result = await doDivision(formData) as object;
     setDivisionResult(result.message);
   }
 
