@@ -14,6 +14,7 @@ export interface UserRecord {
   userBalance: number;
   operationResponse: number;
   date: Date;
+  avatar: string;
 }
 
 export default async function Page(): Promise<any> {
