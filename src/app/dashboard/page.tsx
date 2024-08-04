@@ -18,6 +18,7 @@ import {
   getHistory,
   getUserBalance
 } from "@/server/actions/actions";
+import {UserRecord} from "@/app/dashboard/history/page";
 
 export default function Page(): Promise<any> {
 
@@ -67,16 +68,16 @@ export default function Page(): Promise<any> {
   }
 
   const retrieveTotalRequests = async () => {
-    const history = await getHistory() as object;
-    if (history && Object.prototype.hasOwnProperty.call(history, '_embedded')) {
-      setTotalRequests(history?._embedded?.records.length);
+    const history: UserRecord[] = await getHistory() as object;
+    if (history) {
+      setTotalRequests(history.length);
     }
   }
 
   const retrieveUserHistory = async () => {
-    const history = await getHistory() as object;
-    if (history && Object.prototype.hasOwnProperty.call(history, '_embedded')) {
-      setUserHistory(history?._embedded.records.slice(0, 2));
+    const history: UserRecord[] = await getHistory() as object;
+    if (history) {
+      setUserHistory(history.slice(0, 2));
     }
   }
 
