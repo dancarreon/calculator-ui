@@ -2,7 +2,7 @@
 
 import {cookies} from "next/headers";
 
-const baseUrl: string = process.env.BACK_END_URL as string;
+const baseUrl: string = process.env.BACK_END_URL!;
 
 export const login = async (email: string, password: string) => {
   try {
