@@ -18,7 +18,11 @@ import {
   getHistory,
   getUserBalance
 } from "@/server/actions/actions";
-import {UserRecord} from "@/app/dashboard/history/page";
+import {type UserRecord} from "@/app/dashboard/history/page";
+
+interface DivisionResponse {
+  message: string;
+}
 
 export default function Page(): Promise<any> {
 
@@ -48,7 +52,7 @@ export default function Page(): Promise<any> {
   }
 
   const divisionAction = async (formData: FormData) => {
-    const result = await doDivision(formData) as object;
+    const result: DivisionResponse = await doDivision(formData) as object;
     setDivisionResult(result.message);
   }
 
