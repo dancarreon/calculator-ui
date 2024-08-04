@@ -19,6 +19,8 @@ import {
   getUserBalance
 } from "@/server/actions/actions";
 import {type UserRecord} from "@/app/dashboard/history/page";
+import {Simulate} from "react-dom/test-utils";
+import error = Simulate.error;
 
 interface DivisionResponse {
   message: string;
@@ -97,8 +99,12 @@ export default function Page(): ReactElement {
   }
 
   useEffect(() => {
-    retrieveUserBalance();
-    retrieveTotalRequests();
+    retrieveUserBalance().catch((err: unknown) => {
+      console.log(err);
+    });
+    retrieveTotalRequests().catch((err: unknown) => {
+      console.log(err);
+    });
   })
 
   useEffect(() => {
