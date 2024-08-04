@@ -23,7 +23,7 @@ export interface UserRecord {
   avatar: string;
 }
 
-export default async function Page(): Promise<never> {
+export default async function Page(): Promise<any> {
 
   const history = await getHistory() as UserRecord[];
 
