@@ -38,7 +38,7 @@ export default function Page(): Promise<any> {
   const [randomStringResult, setRandomStringResult] =  useState('');
   const [userBalance, setUserBalance] = useState('');
   const [totalRequests, setTotalRequests] = useState(0);
-  const [userHistory, setUserHistory] = useState<UserRecord[] | null>();
+  const [userHistory, setUserHistory] = useState<UserRecord[]>();
 
   const additionAction = async (formData: FormData) => {
     const result = await doAddition(formData) as string;
@@ -90,7 +90,7 @@ export default function Page(): Promise<any> {
     }
   }
 
-  const onlyNumbers = (e) => {
+  const onlyNumbers = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!/[0-9.]|Backspace|Tab|Enter|Delete|ArrowLeft|ArroRight/.test(e.key)) {
       e.preventDefault();
     }
@@ -111,7 +111,7 @@ export default function Page(): Promise<any> {
         <Budget diff={0} trend="up" sx={{height: '100%'}} value={userBalance}/>
       </Grid>
       <Grid lg={3} sm={6} xs={12}>
-        <TotalCustomers diff={0} trend="down" sx={{height: '100%'}} value={totalRequests}/>
+        <TotalCustomers diff={0} trend="down" sx={{height: '100%'}} value={totalRequests.toString()}/>
       </Grid>
       <Grid lg={7} xs={12}>
         <form action={additionAction}>
