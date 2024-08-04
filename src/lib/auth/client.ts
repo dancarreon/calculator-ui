@@ -59,7 +59,7 @@ class AuthClient {
     return {error: 'Update reset not implemented'};
   }
 
-  async getUser(): Promise<{ data: null }> {
+  async getUser(): Promise<{ data: null, error: string | null }> {
     // Make API request
 
     // We do not handle the API, so just check if we have a token in localStorage.
