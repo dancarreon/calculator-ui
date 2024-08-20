@@ -262,9 +262,14 @@ export async function doDivision(formData: FormData) {
 
       console.log("Division Status: {}", divisionResponse.status);
 
+      const message = divisionResponse.json();
+
       if (divisionResponse.ok) {
-        return divisionResponse.json()
+        return message
       }
+
+      throw new Error(await message as string)
+
     } catch (error) {
       console.log(error);
     }
@@ -280,8 +285,7 @@ export async function doSquareRoot(formData: FormData) {
   if (cookie) {
     try {
       const a = formData?.get('a') as string;
-      const b = formData?.get('b') as string;
-      const squareRootResponse = await fetch(`${baseUrl}/calculator/square-root?a=${a}&b=${b}`, {
+      const squareRootResponse = await fetch(`${baseUrl}/calculator/square-root?a=${a}`, {
         method: 'GET',
         cache: "no-cache",
         headers: {
@@ -292,11 +296,16 @@ export async function doSquareRoot(formData: FormData) {
 
       console.log("SquareRoot Status: {}", squareRootResponse.status);
 
+      const message = squareRootResponse.json();
+
       if (squareRootResponse.ok) {
-        return squareRootResponse.json()
+        return message;
       }
+
+      throw new Error(await message as string)
+
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
