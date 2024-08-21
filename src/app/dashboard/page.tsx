@@ -33,6 +33,13 @@ interface RandomString {
   message: string;
 }
 
+const buttonStyle = {
+  backgroundColor: '#677 !important',
+  color: 'white !important',
+  fontSize: '23px',
+  verticalAlign: 'bottom'
+}
+
 export default function Page(): ReactElement {
 
   const [additionResult, setAdditionResult] = useState('');
@@ -123,22 +130,16 @@ export default function Page(): ReactElement {
   }
 
   useEffect(() => {
-
     retrieveUserBalance().catch((err: unknown) => {
       console.log(err);
     });
-
     retrieveTotalRequests().catch((err: unknown) => {
       console.log(err);
     });
-
-  }, [])
-
-  useEffect(() => {
     retrieveUserHistory().catch((err: unknown) => {
       console.log(err);
     });
-  }, [])
+  }, [additionResult, subtractionResult, multiplicationResult, divisionResult, sqrtResult, randomStringResult])
 
   return (
     <Grid container spacing={3}>
@@ -152,12 +153,7 @@ export default function Page(): ReactElement {
         <Grid lg={7} xs={12}>
           <form action={additionAction}>
             <OutlinedInput name='a' sx={{marginRight: '10px', minWidth: '60px', width: '10%'}} onKeyDown={onlyNumbers}/>
-            <Button type="button" variant="contained" disabled sx={{
-              backgroundColor: '#677 !important',
-              color: 'white !important',
-              fontSize: '23px',
-              verticalAlign: 'bottom'
-            }}> + </Button>
+            <Button type="button" variant="contained" disabled sx={buttonStyle}> + </Button>
             <OutlinedInput name='b' sx={{marginLeft: '10px', minWidth: '60px', width: '10%'}} onKeyDown={onlyNumbers}/>
             <Button type="submit" variant="contained"
                     sx={{marginLeft: '10px', fontSize: '23px', verticalAlign: 'bottom'}}> = </Button>
@@ -167,12 +163,7 @@ export default function Page(): ReactElement {
         <Grid lg={7} xs={12}>
           <form action={subtractionAction}>
             <OutlinedInput name='a' sx={{marginRight: '10px', minWidth: '60px', width: '10%'}} onKeyDown={onlyNumbers}/>
-            <Button type="button" variant="contained" disabled sx={{
-              backgroundColor: '#677 !important',
-              color: 'white !important',
-              fontSize: '23px',
-              verticalAlign: 'bottom'
-            }}> - </Button>
+            <Button type="button" variant="contained" disabled sx={buttonStyle}> - </Button>
             <OutlinedInput name='b' sx={{marginLeft: '10px', minWidth: '60px', width: '10%'}} onKeyDown={onlyNumbers}/>
             <Button type="submit" variant="contained"
                     sx={{marginLeft: '10px', fontSize: '23px', verticalAlign: 'bottom'}}> = </Button>
@@ -182,12 +173,7 @@ export default function Page(): ReactElement {
         <Grid lg={7} xs={12}>
           <form action={multiplicationAction}>
             <OutlinedInput name='a' sx={{marginRight: '10px', minWidth: '60px', width: '10%'}} onKeyDown={onlyNumbers}/>
-            <Button type="button" variant="contained" disabled sx={{
-              backgroundColor: '#677 !important',
-              color: 'white !important',
-              fontSize: '23px',
-              verticalAlign: 'bottom'
-            }}> * </Button>
+            <Button type="button" variant="contained" disabled sx={buttonStyle}> * </Button>
             <OutlinedInput name='b' sx={{marginLeft: '10px', minWidth: '60px', width: '10%'}} onKeyDown={onlyNumbers}/>
             <Button type="submit" variant="contained"
                     sx={{marginLeft: '10px', fontSize: '23px', verticalAlign: 'bottom'}}> = </Button>
@@ -197,12 +183,7 @@ export default function Page(): ReactElement {
         <Grid lg={7} xs={12}>
           <form action={divisionAction}>
             <OutlinedInput name='a' sx={{marginRight: '10px', minWidth: '60px', width: '10%'}} onKeyDown={onlyNumbers}/>
-            <Button type="button" variant="contained" disabled sx={{
-              backgroundColor: '#677 !important',
-              color: 'white !important',
-              fontSize: '23px',
-              verticalAlign: 'bottom'
-            }}> / </Button>
+            <Button type="button" variant="contained" disabled sx={buttonStyle}> / </Button>
             <OutlinedInput name='b' sx={{marginLeft: '10px', minWidth: '60px', width: '10%'}} onKeyDown={onlyNumbers}/>
             <Button type="submit" variant="contained"
                     sx={{marginLeft: '10px', fontSize: '23px', verticalAlign: 'bottom'}}> = </Button>
@@ -214,17 +195,11 @@ export default function Page(): ReactElement {
         }} severity="error" style={{width: '300px', display: divisionAlert.length > 0 ? 'flex' : 'none'}}>{divisionAlert}</Alert>
         <Grid lg={7} xs={13}>
           <form action={sqrtAction}>
-            <Button type="button" variant="contained" disabled sx={{
-              backgroundColor: '#677 !important',
-              color: 'white !important',
-              fontSize: '23px',
-              verticalAlign: 'bottom',
-              marginLeft: '0em',
-            }}> &#8730; </Button>
+            <Button type="button" variant="contained" disabled sx={buttonStyle}> &#8730; </Button>
             <OutlinedInput name='a' sx={{marginLeft: '10px', minWidth: '60px', width: '10%'}} onKeyDown={onlyNumbers}/>
             <Button type="submit" variant="contained"
                     sx={{marginLeft: '10px', fontSize: '23px', verticalAlign: 'bottom'}}> = </Button>
-            <OutlinedInput sx={{marginLeft: '10px', width: '28%'}} disabled value={sqrtResult}/>
+            <OutlinedInput sx={{marginLeft: '10px', width: '31%'}} disabled value={sqrtResult}/>
           </form>
         </Grid>
         <Alert onClose={() => {
@@ -232,13 +207,7 @@ export default function Page(): ReactElement {
         }} severity="error" style={{width: '400px', display: squareRootAlert.length > 0 ? 'flex' : 'none' }}>{squareRootAlert}</Alert>
         <Grid lg={7} xs={12}>
           <form action={randomStringAction}>
-            <Button type="button" variant="contained" disabled sx={{
-              backgroundColor: '#677 !important',
-              color: 'white !important',
-              fontSize: '19.1px',
-              verticalAlign: 'bottom',
-              marginLeft: '0em'
-            }}> Random String </Button>
+            <Button type="button" variant="contained" disabled sx={{...buttonStyle}}> Random String </Button>
             <Button type="submit" variant="contained"
                     sx={{marginLeft: '10px', fontSize: '23px', verticalAlign: 'bottom'}}> = </Button>
             <OutlinedInput sx={{marginLeft: '10px', width: '25%'}} disabled value={randomStringResult}/>
